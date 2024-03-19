@@ -56,12 +56,14 @@ jobs:
 
             - name: Building executable file for ${{ matrix.target }}
               run: |
+                  export PKG_CACHE_PATH=/home/runner/.pkg-cache
                   mkdir -p /home/runner/.pkg-cache/v3.4
-                  curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7 -o /home/runner/.pkg-cache/v3.4/built-v18.5.0-linux-armv7
-                  curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7.sha256sum -o /home/runner/.pkg-cache/v3.4/built-v18.5.0-linux-armv7.sha256sum
-
-                  ln -s /home/runner/.pkg-cache/v3.4/built-v18.5.0-linux-armv7 /home/runner/.pkg-cache/v3.4/fetched-v18.5.0-linux-armv7
-                 
+                  
+                  curl -sL https://nodejs.org/dist/v18.5.0/node-v18.5.0-linux-armv7l.tar.xz -o /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7l.tar.xz
+                  ls /home/runner/.pkg-cache/v3.4/
+                  tar -xf /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7l.tar.xz -C /home/runner/.pkg-cache/v3.4/
+                  ln -s /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7l/bin/node /home/runner/.pkg-cache/v3.4/fetched-v18.5.0-linux-armv7
+                  
                   npx pkg --compress Brotli -t node18-linux-armv7 .
                   mv "$(ls dist/*)" "$(ls dist/* | sed 's/server/unblockneteasemusic-${{ matrix.target }}/g')"
                   echo "ASSET_NAME=$(ls dist)" >> $GITHUB_ENV
