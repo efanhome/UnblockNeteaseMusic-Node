@@ -55,7 +55,7 @@ jobs:
 
             - name: Building executable file for ${{ matrix.target }}
               run: |
-                  npx pkg --compress Brotli -t linux-armv7l .
+                  npx pkg --compress Brotli -t node18-${{ matrix.target }} .
                   mv "$(ls dist/*)" "$(ls dist/* | sed 's/server/unblockneteasemusic-${{ matrix.target }}/g')"
                   echo "ASSET_NAME=$(ls dist)" >> $GITHUB_ENV
 
