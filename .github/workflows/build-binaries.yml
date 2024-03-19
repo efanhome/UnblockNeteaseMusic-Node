@@ -57,6 +57,7 @@ jobs:
             - name: Building executable file for ${{ matrix.target }}
               run: |
                   curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7 -o /home/runner/.pkg-cache/node-v18.5.0-linux-armv7
+                  mkdir -p /home/runner/.pkg-cache/v3.4
                   ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7
                   ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/v3.4/built-node-v18.5.0-linux-armv7
                   ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/built-node-v18.5.0-linux-armv7
