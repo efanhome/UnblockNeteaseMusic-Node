@@ -26,6 +26,7 @@ jobs:
         strategy:
             matrix:
                 target:
+                    - 'armv7l'
                     - 'linux-arm64'
                     - 'linux-x64'
                     - 'win-arm64'
