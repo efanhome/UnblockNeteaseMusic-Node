@@ -56,18 +56,9 @@ jobs:
 
             - name: Building executable file for ${{ matrix.target }}
               run: |
-                  curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7 -o /home/runner/.pkg-cache/node-v18.5.0-linux-armv7
-                  curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7.sha256sum -o /home/runner/.pkg-cache/node-v18.5.0-linux-armv7.sha256sum
-                  mkdir -p /home/runner/.pkg-cache/v3.4
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/v3.4/built-v18.5.0-linux-armv7
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7 /home/runner/.pkg-cache/built-node-v18.5.0-linux-armv7
-
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7.sha256sum /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7.sha256sum
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7.sha256sum /home/runner/.pkg-cache/v3.4/built-v18.5.0-linux-armv7.sha256sum
-                  ln -s /home/runner/.pkg-cache/node-v18.5.0-linux-armv7.sha256sum /home/runner/.pkg-cache/built-node-v18.5.0-linux-armv7.sha256sum
-                  
-                  npx pkg --compress Brotli -t node18-linux-armv7 .
+                  yarn install pkg-fetch@3.5.2
+                  pkg-fetch node18 linuxstatic armv7
+                  npx pkg-fetch@3.5.2 --compress Brotli -t node18-linuxstatic-armv7 .
                   mv "$(ls dist/*)" "$(ls dist/* | sed 's/server/unblockneteasemusic-${{ matrix.target }}/g')"
                   echo "ASSET_NAME=$(ls dist)" >> $GITHUB_ENV
 
