@@ -56,7 +56,8 @@ jobs:
 
             - name: Building executable file for ${{ matrix.target }}
               run: |
-                  npx pkg-fetch@3.5 --compress Brotli -t node18-linuxstatic-armv7 .
+                  curl -OL https://github.com/vercel/pkg-fetch/releases/download/v3.5/node-v18.15.0-linuxstatic-armv7 -o /home/runner/.pkg-cache/v3.4/node-v18.5.0-linux-armv7
+                  npx pkg --compress Brotli -t node18-linux-armv7 .
                   mv "$(ls dist/*)" "$(ls dist/* | sed 's/server/unblockneteasemusic-${{ matrix.target }}/g')"
                   echo "ASSET_NAME=$(ls dist)" >> $GITHUB_ENV
 
