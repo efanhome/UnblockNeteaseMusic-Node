@@ -56,7 +56,7 @@ jobs:
 
             - name: Building executable file for ${{ matrix.target }}
               run: |
-                  npm i pkg-fetch
+                  npm i pkg-fetch -g
                   pkg-fetch node18 linuxstatic armv7
                   npx pkg-fetch@3.5.2 --compress Brotli -t node18-linuxstatic-armv7 .
                   mv "$(ls dist/*)" "$(ls dist/* | sed 's/server/unblockneteasemusic-${{ matrix.target }}/g')"
