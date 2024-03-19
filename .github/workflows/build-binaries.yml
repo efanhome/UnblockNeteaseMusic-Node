@@ -29,7 +29,7 @@ jobs:
                     - 'linux-armv7l'
             fail-fast: false
 
-        runs-on: ubuntu20.04
+        runs-on: ubuntu_latest
 
         steps:
             - uses: actions/checkout@v4
@@ -37,6 +37,7 @@ jobs:
             - name: Use Node.js 20
               uses: actions/setup-node@v4
               with:
+                  arch: armv7
                   node-version: 20
                   cache: yarn
 
